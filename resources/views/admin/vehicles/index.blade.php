@@ -63,7 +63,7 @@
                                 <td class="px-6 py-4.5">
                                     <div class="flex items-center gap-4">
                                         <!-- Primary Image Thumbnail -->
-                                        <div class="h-12 w-16 rounded-lg bg-slate-100 border border-slate-100 overflow-hidden flex-shrink-0 relative">
+                                        <div class="h-12 w-16 rounded-lg bg-slate-100 border border-slate-100 overflow-hidden shrink-0 relative">
                                             @if($vehicle->getPrimaryImage())
                                                 <img src="{{ Storage::url($vehicle->getPrimaryImage()->path) }}" alt="{{ $vehicle->model }}" class="w-full h-full object-cover">
                                             @else

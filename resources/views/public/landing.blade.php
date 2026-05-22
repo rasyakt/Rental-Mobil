@@ -88,7 +88,7 @@
             <!-- Hero Image Panel -->
             <div class="lg:col-span-6 flex justify-center lg:justify-end relative">
                 <!-- Decorative Blur Glow -->
-                <div class="absolute -inset-4 bg-gradient-to-tr from-red-600/10 to-transparent rounded-3xl filter blur-3xl opacity-60 z-0"></div>
+                <div class="absolute -inset-4 bg-linear-to-tr from-red-600/10 to-transparent rounded-3xl filter blur-3xl opacity-60 z-0"></div>
                 <div class="relative z-10 max-w-full">
                     <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=800" alt="Rental Car Premium" class="rounded-3xl shadow-2xl border border-slate-100/50 transform hover:scale-[1.02] transition-transform duration-500">
                 </div>

@@ -144,5 +144,10 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
+
+/* Force all table headers and data cells to be strictly one line globally */
+table th, table td {
+  white-space: nowrap;
+}
 </style>
 @endsection
