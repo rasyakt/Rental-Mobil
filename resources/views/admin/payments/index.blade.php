@@ -12,7 +12,7 @@
 
         <div class="bg-white rounded-xl shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full text-left">
+                <table class="w-full text-left whitespace-nowrap">
                     <thead class="bg-gray-50 border-b">
                         <tr>
                             <th class="px-6 py-4 text-sm font-semibold text-gray-600">ID Transaksi</th>
@@ -55,13 +55,25 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <div class="flex justify-end gap-2">
-                                        <a href="{{ route('admin.payments.show', $payment->id) }}" class="p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition" title="Detail">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                                            </svg>
-                                        </a>
+                                    <div class="relative inline-block text-left" x-data="{ open: false, openUpwards: false }" @click.away="open = false">
+                                        <button @click="open = !open; if(open) { $nextTick(() => { const rect = $el.getBoundingClientRect(); const viewportSpace = window.innerHeight - rect.bottom; const container = $el.closest('.overflow-x-auto') || $el.closest('table'); const containerRect = container ? container.getBoundingClientRect() : null; const containerSpace = containerRect ? (containerRect.bottom - rect.bottom) : 999; openUpwards = viewportSpace < 180 || containerSpace < 180; }) }" class="w-8 h-8 rounded-lg text-gray-400 hover:text-gray-900 hover:bg-gray-100 flex items-center justify-center transition outline-none cursor-pointer">
+                                            <i class="fa-solid fa-ellipsis-vertical text-sm"></i>
+                                        </button>
+                                        <div x-show="open" 
+                                             x-transition:enter="transition ease-out duration-100" 
+                                             x-transition:enter-start="transform opacity-0 scale-95" 
+                                             x-transition:enter-end="transform opacity-100 scale-100" 
+                                             x-transition:leave="transition ease-in duration-75" 
+                                             x-transition:leave-start="transform opacity-100 scale-100" 
+                                             x-transition:leave-end="transform opacity-0 scale-95" 
+                                             :class="openUpwards ? 'bottom-full mb-1.5' : 'top-full mt-1.5'"
+                                             class="absolute right-0 w-40 rounded-xl bg-white border border-gray-100 shadow-lg py-1.5 z-50 text-left"
+                                             style="display: none;">
+                                            <a href="{{ route('admin.payments.show', $payment->id) }}" class="flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition">
+                                                <i class="fa-solid fa-eye w-4 text-center text-slate-400"></i>
+                                                <span>Detail</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

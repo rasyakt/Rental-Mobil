@@ -48,7 +48,7 @@
                     <a href="{{ route('admin.payments.index') }}" class="text-sm font-bold text-red-600 hover:underline">Lihat Semua</a>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left">
+                    <table class="w-full text-left whitespace-nowrap">
                         <thead class="bg-gray-50 border-b border-gray-100">
                             <tr>
                                 <th class="px-8 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">ID Transaksi</th>

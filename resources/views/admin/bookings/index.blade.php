@@ -17,7 +17,7 @@
         <!-- Bookings Table Container -->
         <div class="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
                     <thead>
                         <tr class="bg-slate-50/50 border-b border-slate-100">
                             <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400">No. Booking</th>
@@ -82,10 +82,25 @@
                                 
                                 <!-- Action links -->
                                 <td class="px-6 py-4.5 text-right">
-                                    <div class="flex justify-end">
-                                        <a href="{{ route('admin.bookings.show', $booking->id) }}" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-100 flex items-center justify-center transition" title="Lihat Detail Booking">
-                                            <i class="fa-solid fa-eye text-sm"></i>
-                                        </a>
+                                    <div class="relative inline-block text-left" x-data="{ open: false, openUpwards: false }" @click.away="open = false">
+                                        <button @click="open = !open; if(open) { $nextTick(() => { const rect = $el.getBoundingClientRect(); const viewportSpace = window.innerHeight - rect.bottom; const container = $el.closest('.overflow-x-auto') || $el.closest('table'); const containerRect = container ? container.getBoundingClientRect() : null; const containerSpace = containerRect ? (containerRect.bottom - rect.bottom) : 999; openUpwards = viewportSpace < 180 || containerSpace < 180; }) }" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-100 flex items-center justify-center transition outline-none cursor-pointer">
+                                            <i class="fa-solid fa-ellipsis-vertical text-sm"></i>
+                                        </button>
+                                        <div x-show="open" 
+                                             x-transition:enter="transition ease-out duration-100" 
+                                             x-transition:enter-start="transform opacity-0 scale-95" 
+                                             x-transition:enter-end="transform opacity-100 scale-100" 
+                                             x-transition:leave="transition ease-in duration-75" 
+                                             x-transition:leave-start="transform opacity-100 scale-100" 
+                                             x-transition:leave-end="transform opacity-0 scale-95" 
+                                             :class="openUpwards ? 'bottom-full mb-1.5' : 'top-full mt-1.5'"
+                                             class="absolute right-0 w-40 rounded-xl bg-white border border-slate-100 shadow-lg py-1.5 z-50 text-left"
+                                             style="display: none;">
+                                            <a href="{{ route('admin.bookings.show', $booking->id) }}" class="flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                                                <i class="fa-solid fa-eye w-4 text-center text-slate-400"></i>
+                                                <span>Detail Booking</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
