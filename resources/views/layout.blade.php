@@ -61,6 +61,15 @@
         .animate-fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
+
+        /* Global Table Horizontal Scroll & Wrap Controls */
+        table th, table td {
+            white-space: nowrap !important;
+        }
+        div:has(> table), .overflow-x-auto {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
     @stack('styles')
 </head>
