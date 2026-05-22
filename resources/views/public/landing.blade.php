@@ -56,33 +56,45 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12">Keunggulan Kami</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-lg shadow-md card-hover">
-                <div class="text-4xl mb-4">🚗</div>
+            <div class="bg-white p-8 rounded-lg shadow-md card-hover group">
+                <div class="text-4xl mb-4 text-red-600">
+                    <i class="fa-solid fa-car transition-transform duration-300 group-hover:scale-110"></i>
+                </div>
                 <h3 class="text-xl font-bold mb-2">Banyak Pilihan Mobil</h3>
                 <p class="text-gray-600">Pilih dari berbagai jenis dan merek mobil sesuai kebutuhan Anda</p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-md card-hover">
-                <div class="text-4xl mb-4">👨</div>
+            <div class="bg-white p-8 rounded-lg shadow-md card-hover group">
+                <div class="text-4xl mb-4 text-red-600">
+                    <i class="fa-solid fa-user-tie transition-transform duration-300 group-hover:scale-110"></i>
+                </div>
                 <h3 class="text-xl font-bold mb-2">Sopir Profesional</h3>
                 <p class="text-gray-600">Sopir bersertifikat, berpengalaman, dan berkarakter baik</p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-md card-hover">
-                <div class="text-4xl mb-4">⏰</div>
+            <div class="bg-white p-8 rounded-lg shadow-md card-hover group">
+                <div class="text-4xl mb-4 text-red-600">
+                    <i class="fa-regular fa-clock transition-transform duration-300 group-hover:scale-110"></i>
+                </div>
                 <h3 class="text-xl font-bold mb-2">Booking 24 Jam</h3>
                 <p class="text-gray-600">Pesan kapan saja melalui aplikasi atau website kami</p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-md card-hover">
-                <div class="text-4xl mb-4">💳</div>
+            <div class="bg-white p-8 rounded-lg shadow-md card-hover group">
+                <div class="text-4xl mb-4 text-red-600">
+                    <i class="fa-regular fa-credit-card transition-transform duration-300 group-hover:scale-110"></i>
+                </div>
                 <h3 class="text-xl font-bold mb-2">Pembayaran Fleksibel</h3>
                 <p class="text-gray-600">Berbagai metode pembayaran untuk kemudahan Anda</p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-md card-hover">
-                <div class="text-4xl mb-4">🏪</div>
+            <div class="bg-white p-8 rounded-lg shadow-md card-hover group">
+                <div class="text-4xl mb-4 text-red-600">
+                    <i class="fa-solid fa-store transition-transform duration-300 group-hover:scale-110"></i>
+                </div>
                 <h3 class="text-xl font-bold mb-2">Banyak Cabang</h3>
                 <p class="text-gray-600">Tersedia di berbagai lokasi strategis di Indonesia</p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-md card-hover">
-                <div class="text-4xl mb-4">🛡️</div>
+            <div class="bg-white p-8 rounded-lg shadow-md card-hover group">
+                <div class="text-4xl mb-4 text-red-600">
+                    <i class="fa-solid fa-shield-halved transition-transform duration-300 group-hover:scale-110"></i>
+                </div>
                 <h3 class="text-xl font-bold mb-2">Asuransi Lengkap</h3>
                 <p class="text-gray-600">Perlindungan penuh untuk kendaraan Anda</p>
             </div>
@@ -147,9 +159,18 @@
             @forelse($branches as $branch)
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="font-bold text-xl mb-3">{{ $branch->name }}</h3>
-                    <p class="text-gray-600 mb-3">📍 {{ $branch->address }}</p>
-                    <p class="text-gray-600 mb-2">📞 {{ $branch->phone }}</p>
-                    <p class="text-gray-600 mb-3">⏰ {{ $branch->opening_hour }} - {{ $branch->closing_hour }}</p>
+                    <p class="text-gray-600 mb-3 flex items-start gap-2.5">
+                        <i class="fa-solid fa-location-dot text-red-600 mt-1 shrink-0"></i>
+                        <span>{{ $branch->address }}</span>
+                    </p>
+                    <p class="text-gray-600 mb-2 flex items-center gap-2.5">
+                        <i class="fa-solid fa-phone text-red-600 shrink-0"></i>
+                        <span>{{ $branch->phone }}</span>
+                    </p>
+                    <p class="text-gray-600 mb-3 flex items-center gap-2.5">
+                        <i class="fa-regular fa-clock text-red-600 shrink-0"></i>
+                        <span>{{ $branch->opening_hour }} - {{ $branch->closing_hour }}</span>
+                    </p>
                 </div>
             @empty
                 <p class="text-gray-500">Belum ada cabang tersedia</p>
@@ -214,8 +235,14 @@
             </div>
             <div>
                 <h4 class="text-white font-bold mb-4">Hubungi Kami</h4>
-                <p class="text-sm mb-2">📞 (021) 123-4567</p>
-                <p class="text-sm">✉️ info@rental-mobil.id</p>
+                <p class="text-sm mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-red-500"></i>
+                    <span>(021) 123-4567</span>
+                </p>
+                <p class="text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-envelope text-red-500"></i>
+                    <span>info@rental-mobil.id</span>
+                </p>
             </div>
         </div>
         <div class="border-t border-gray-700 pt-8 text-center">

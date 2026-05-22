@@ -33,12 +33,37 @@
 
                     <div class="border-t border-b py-6 mb-6">
                         <h3 class="font-bold text-lg mb-4">Spesifikasi</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li>🪑 Kapasitas: {{ $vehicle->seat_capacity }} penumpang</li>
-                            <li>⚙️ Transmisi: {{ ucfirst($vehicle->transmission) }}</li>
-                            <li>⛽ Bahan Bakar: {{ ucfirst($vehicle->fuel_type) }}</li>
-                            <li>🎨 Warna: {{ $vehicle->color }}</li>
-                            <li>📍 Cabang: {{ $vehicle->branch->name }}</li>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
+                                    <i class="fa-solid fa-couch text-sm"></i>
+                                </span>
+                                <span><strong>Kapasitas:</strong> {{ $vehicle->seat_capacity }} penumpang</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
+                                    <i class="fa-solid fa-gear text-sm"></i>
+                                </span>
+                                <span><strong>Transmisi:</strong> {{ ucfirst($vehicle->transmission) }}</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
+                                    <i class="fa-solid fa-gas-pump text-sm"></i>
+                                </span>
+                                <span><strong>Bahan Bakar:</strong> {{ ucfirst($vehicle->fuel_type) }}</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
+                                    <i class="fa-solid fa-palette text-sm"></i>
+                                </span>
+                                <span><strong>Warna:</strong> {{ $vehicle->color }}</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
+                                    <i class="fa-solid fa-location-dot text-sm"></i>
+                                </span>
+                                <span><strong>Cabang:</strong> {{ $vehicle->branch->name }}</span>
+                            </li>
                         </ul>
                     </div>
 

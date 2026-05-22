@@ -35,8 +35,14 @@
                         <h3 class="font-bold text-lg">{{ $vehicle->brand }} {{ $vehicle->model }}</h3>
                         <p class="text-gray-500 text-sm mb-3">{{ $vehicle->category->name }} • {{ $vehicle->year }}</p>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-gray-600">🪑 {{ $vehicle->seat_capacity }} penumpang</span>
-                            <span class="text-sm text-gray-600">⚙️ {{ ucfirst($vehicle->transmission) }}</span>
+                            <span class="text-sm text-gray-600 flex items-center gap-1.5">
+                                <i class="fa-solid fa-couch text-gray-400"></i>
+                                <span>{{ $vehicle->seat_capacity }} penumpang</span>
+                            </span>
+                            <span class="text-sm text-gray-600 flex items-center gap-1.5">
+                                <i class="fa-solid fa-gear text-gray-400"></i>
+                                <span>{{ ucfirst($vehicle->transmission) }}</span>
+                            </span>
                         </div>
                         <div class="border-t pt-3 mt-3">
                             <p class="text-red-600 font-bold mb-3">Rp {{ number_format($vehicle->price_daily, 0, ',', '.') }}/hari</p>
