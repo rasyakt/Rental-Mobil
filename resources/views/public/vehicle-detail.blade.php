@@ -16,8 +16,8 @@
     <div class="max-w-4xl mx-auto px-4 py-12">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="md:flex">
-                <div class="md:w-1/2">
-                    <img src="https://via.placeholder.com/400x350" alt="{{ $vehicle->brand }}" class="w-full h-96 object-cover">
+                <div class="md:w-1/2 overflow-hidden">
+                    <img src="{{ $vehicle->getPrimaryImage() ? Storage::url($vehicle->getPrimaryImage()->path) : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1200' }}" alt="{{ $vehicle->brand }} {{ $vehicle->model }}" class="w-full h-96 object-cover hover:scale-105 transition duration-500">
                 </div>
                 <div class="p-8 md:w-1/2">
                     <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ $vehicle->brand }} {{ $vehicle->model }}</h1>
@@ -95,8 +95,8 @@
                 <h2 class="text-2xl font-bold mb-6">Kendaraan Serupa</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @foreach($similarVehicles as $similar)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
-                            <img src="https://via.placeholder.com/300x200" alt="{{ $similar->brand }}" class="w-full h-48 object-cover">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover group">
+                            <img src="{{ $similar->getPrimaryImage() ? Storage::url($similar->getPrimaryImage()->path) : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=600' }}" alt="{{ $similar->brand }} {{ $similar->model }}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
                             <div class="p-4">
                                 <h3 class="font-bold">{{ $similar->brand }} {{ $similar->model }}</h3>
                                 <p class="text-red-600 font-bold mt-2">Rp {{ number_format($similar->price_daily, 0, ',', '.') }}/hari</p>

@@ -29,8 +29,8 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @forelse($vehicles as $vehicle)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
-                    <img src="https://via.placeholder.com/300x200" alt="{{ $vehicle->brand }}" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover group">
+                    <img src="{{ $vehicle->getPrimaryImage() ? Storage::url($vehicle->getPrimaryImage()->path) : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=600' }}" alt="{{ $vehicle->brand }} {{ $vehicle->model }}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
                     <div class="p-4">
                         <h3 class="font-bold text-lg">{{ $vehicle->brand }} {{ $vehicle->model }}</h3>
                         <p class="text-gray-500 text-sm mb-3">{{ $vehicle->category->name }} • {{ $vehicle->year }}</p>

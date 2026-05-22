@@ -4,85 +4,110 @@
 @section('header_title', 'Bookings')
 
 @section('admin_content')
-    <div class="max-w-7xl mx-auto">
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold text-gray-900">Kelola Booking</h2>
-            <p class="text-gray-500 mt-1">Daftar semua permintaan sewa kendaraan.</p>
+    <div class="max-w-7xl mx-auto space-y-6">
+        
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">Kelola Booking</h1>
+                <p class="text-sm text-slate-500 font-medium">Daftar semua permintaan dan status sewa kendaraan pelanggan.</p>
+            </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-            <table class="w-full text-left">
-                <thead class="bg-gray-50 border-b">
-                    <tr>
-                        <th class="px-6 py-4 text-sm font-semibold text-gray-600">No. Booking</th>
-                        <th class="px-6 py-4 text-sm font-semibold text-gray-600">Pelanggan</th>
-                        <th class="px-6 py-4 text-sm font-semibold text-gray-600">Kendaraan</th>
-                        <th class="px-6 py-4 text-sm font-semibold text-gray-600">Jadwal Sewa</th>
-                        <th class="px-6 py-4 text-sm font-semibold text-gray-600">Total Harga</th>
-                        <th class="px-6 py-4 text-sm font-semibold text-gray-600">Status</th>
-                        <th class="px-6 py-4 text-sm font-semibold text-gray-600 text-right">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    @forelse($bookings as $booking)
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 font-mono text-sm font-bold text-red-600">{{ $booking->booking_number }}</td>
-                            <td class="px-6 py-4">
-                                <div class="font-medium text-gray-900">{{ $booking->customer->user->name }}</div>
-                                <div class="text-xs text-gray-500">{{ $booking->customer->user->email }}</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="text-gray-900 font-medium">{{ $booking->vehicle->brand }} {{ $booking->vehicle->model }}</div>
-                                <div class="text-xs text-gray-500 uppercase">{{ $booking->vehicle->plat_number }}</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-700">{{ $booking->pickup_date->format('d M Y') }} - {{ $booking->return_date->format('d M Y') }}</div>
-                                <div class="text-xs text-gray-500">{{ $booking->pickup_date->diffInDays($booking->return_date) }} Hari</div>
-                            </td>
-                            <td class="px-6 py-4 font-bold text-gray-900">
-                                Rp {{ number_format($booking->final_price, 0, ',', '.') }}
-                            </td>
-                            <td class="px-6 py-4">
-                                @if($booking->status === 'pending')
-                                    <span class="badge-warning">Pending</span>
-                                @elseif($booking->status === 'confirmed')
-                                    <span class="badge-success">Dikonfirmasi</span>
-                                @elseif($booking->status === 'active')
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Dalam Sewa</span>
-                                @elseif($booking->status === 'completed')
-                                    <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Selesai</span>
-                                @else
-                                    <span class="badge-danger">{{ ucfirst($booking->status) }}</span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex justify-end gap-2">
-                                    <a href="{{ route('admin.bookings.show', $booking->id) }}" class="p-2 text-gray-600 hover:bg-gray-50 rounded-lg transition" title="Detail">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </td>
+        <!-- Bookings Table Container -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/50 border-b border-slate-100">
+                            <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400">No. Booking</th>
+                            <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400">Pelanggan</th>
+                            <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400">Kendaraan</th>
+                            <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400">Jadwal Sewa</th>
+                            <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400">Total Harga</th>
+                            <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400">Status</th>
+                            <th class="px-6 py-4.5 text-xs font-bold uppercase tracking-wider text-slate-400 text-right">Aksi</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="px-6 py-12 text-center text-gray-500">
-                                <div class="flex flex-col items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                    </svg>
-                                    <p class="text-lg font-medium">Belum ada booking</p>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm font-medium text-slate-700">
+                        @forelse($bookings as $booking)
+                            <tr class="hover:bg-slate-50/40 transition duration-200">
+                                <!-- Booking Number -->
+                                <td class="px-6 py-4.5">
+                                    <span class="px-2.5 py-1 bg-red-50 text-red-600 rounded-md text-xs font-mono font-bold tracking-wider uppercase border border-red-100/50">
+                                        #{{ $booking->booking_number }}
+                                    </span>
+                                </td>
+                                
+                                <!-- Customer details -->
+                                <td class="px-6 py-4.5">
+                                    <div class="text-slate-800 font-bold text-sm">{{ $booking->customer->user->name }}</div>
+                                    <div class="text-slate-400 text-xs font-medium mt-0.5">{{ $booking->customer->user->email }}</div>
+                                </td>
+                                
+                                <!-- Vehicle details -->
+                                <td class="px-6 py-4.5">
+                                    <div class="text-slate-700 font-bold text-xs uppercase">{{ $booking->vehicle->brand }} {{ $booking->vehicle->model }}</div>
+                                    <div class="text-[10px] text-slate-400 font-bold tracking-wider mt-0.5">{{ $booking->vehicle->plat_number }}</div>
+                                </td>
+                                
+                                <!-- Date range schedule -->
+                                <td class="px-6 py-4.5">
+                                    <div class="text-slate-700 font-bold text-xs">{{ $booking->pickup_date->format('d M Y') }} - {{ $booking->return_date->format('d M Y') }}</div>
+                                    <div class="text-[10px] text-slate-400 font-bold mt-0.5 flex items-center gap-1">
+                                        <i class="fa-regular fa-clock text-[9px]"></i>
+                                        <span>{{ $booking->pickup_date->diffInDays($booking->return_date) }} Hari</span>
+                                    </div>
+                                </td>
+                                
+                                <!-- Price Daily -->
+                                <td class="px-6 py-4.5 font-bold text-slate-900">
+                                    Rp {{ number_format($booking->final_price, 0, ',', '.') }}
+                                </td>
+                                
+                                <!-- Status badge -->
+                                <td class="px-6 py-4.5">
+                                    @if($booking->status === 'pending')
+                                        <span class="px-2.5 py-1 bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-wider rounded-md border border-amber-100">Menunggu</span>
+                                    @elseif($booking->status === 'confirmed')
+                                        <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold uppercase tracking-wider rounded-md border border-emerald-100">Dikonfirmasi</span>
+                                    @elseif($booking->status === 'active')
+                                        <span class="px-2.5 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-wider rounded-md border border-blue-100">Dalam Sewa</span>
+                                    @elseif($booking->status === 'completed')
+                                        <span class="px-2.5 py-1 bg-slate-100 text-slate-700 text-[10px] font-bold uppercase tracking-wider rounded-md border border-slate-200">Selesai</span>
+                                    @else
+                                        <span class="px-2.5 py-1 bg-rose-50 text-rose-700 text-[10px] font-bold uppercase tracking-wider rounded-md border border-rose-100">{{ ucfirst($booking->status) }}</span>
+                                    @endif
+                                </td>
+                                
+                                <!-- Action links -->
+                                <td class="px-6 py-4.5 text-right">
+                                    <div class="flex justify-end">
+                                        <a href="{{ route('admin.bookings.show', $booking->id) }}" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-100 flex items-center justify-center transition" title="Lihat Detail Booking">
+                                            <i class="fa-solid fa-eye text-sm"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="px-6 py-12 text-center text-slate-400 font-medium">
+                                    <div class="flex flex-col items-center justify-center gap-3">
+                                        <div class="w-12 h-12 rounded-full bg-slate-50 text-slate-300 flex items-center justify-center text-xl">
+                                            <i class="fa-solid fa-receipt"></i>
+                                        </div>
+                                        <p class="text-sm">Belum ada transaksi sewa mobil masuk.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="mt-6">
+        <!-- Pagination Links -->
+        <div class="mt-4">
             {{ $bookings->links() }}
         </div>
     </div>
